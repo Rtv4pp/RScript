@@ -124,29 +124,42 @@ local function hack1()
         end
     end)
 
-        game:GetService("RunService").Stepped:Connect(function()
-            if isFlying then
-                local moveVector = Vector3.new(0, 0, 0)
-        if game:GetService("UserInputService"):IsKeyDown(Enum.KeyCode.W) then
+
+game:GetService("UserInputService").InputBegan:Connect(function(input)
+    if input.KeyCode == Enum.KeyCode.F then
+        isFlying = not isFlying
+        if isFlying then
+            disableCollision()
+            -- Desativa a gravidade ao ativar o modo de voo
+            player.Character.HumanoidRootPart.Anchored = true
+        else
+            enableCollision()
+            -- Ativa a gravidade ao desativar o modo de voo
+            player.Character.HumanoidRootPart.Anchored = false
+        end
+    elseif input.KeyCode == Enum.KeyCode.M then
+        menuOpen = not menuOpen
+        menuGui.Frame.Visible = menuOpen
+    elseif isFlying then  -- Verifica as teclas de movimento apenas quando estiver voando
+        local moveVector = Vector3.new(0, 0, 0)
+        if input.KeyCode == Enum.KeyCode.W then
             moveVector = moveVector + camera.CFrame.lookVector
-            player.Character.HumanoidRootPart.Anchored = false
-        elseif game:GetService("UserInputService"):IsKeyDown(Enum.KeyCode.S) then
+        elseif input.KeyCode == Enum.KeyCode.S then
             moveVector = moveVector - camera.CFrame.lookVector
-            player.Character.HumanoidRootPart.Anchored = false
-        elseif game:GetService("UserInputService"):IsKeyDown(Enum.KeyCode.A) then
+        elseif input.KeyCode == Enum.KeyCode.A then
             moveVector = moveVector - camera.CFrame.rightVector
-            player.Character.HumanoidRootPart.Anchored = false
-        elseif game:GetService("UserInputService"):IsKeyDown(Enum.KeyCode.D) then
+        elseif input.KeyCode == Enum.KeyCode.D then
             moveVector = moveVector + camera.CFrame.rightVector
-            player.Character.HumanoidRootPart.Anchored = false
         end
         -- Normaliza o vetor de movimento para manter a mesma velocidade em todas as direções
         if moveVector.Magnitude > 0 then
             moveVector = moveVector.unit * flySpeed
         end
-
         rootPart.Velocity = moveVector
     end
+end)
+
+    
 end)
 
 end
