@@ -1,16 +1,16 @@
--- FunÁ„o para executar o hack 1
+-- Fun√ß√£o para executar o hack 1
 local function hack1()
     print("Hack 1 ativado!")
     local isFlying = false
     local flySpeed = 50 -- Velocidade de voo inicial
     local menuOpen = false
-    local collidedObjects = {} -- Armazena os objetos que tinham colis„o ativa
+    local collidedObjects = {} -- Armazena os objetos que tinham colis√£o ativa
 
     local player = game.Players.LocalPlayer
     local rootPart = player.Character.HumanoidRootPart
     local camera = workspace.CurrentCamera
 
-    -- FunÁ„o para criar o menu de ajuste de velocidade de voo
+    -- Fun√ß√£o para criar o menu de ajuste de velocidade de voo
     local function createMenu()
         local gui = Instance.new("ScreenGui")
         gui.Parent = player.PlayerGui
@@ -88,7 +88,7 @@ local function hack1()
 
     local menuGui = createMenu()
 
-    -- Desativa a colis„o dos objetos que tinham colis„o ativa
+    -- Desativa a colis√£o dos objetos que tinham colis√£o ativa
     local function disableCollision()
         for _, object in pairs(workspace:GetDescendants()) do
             if object:IsA("BasePart") and object.CanCollide then
@@ -98,7 +98,7 @@ local function hack1()
         end
     end
 
-    -- Ativa a colis„o dos objetos que foram desativados pelo script
+    -- Ativa a colis√£o dos objetos que foram desativados pelo script
     local function enableCollision()
         for _, object in pairs(collidedObjects) do
             object.CanCollide = true
@@ -124,44 +124,41 @@ local function hack1()
         end
     end)
 
-    game:GetService("RunService").Stepped:Connect(function()
-        if isFlying then
-            local moveVector = Vector3.new(0, 0, 0)
-            if game:GetService("UserInputService"):IsKeyDown(Enum.KeyCode.W) then
-                moveVector = moveVector + camera.CFrame.lookVector
-                player.Character.HumanoidRootPart.Anchored = false
-	    else
-	        player.Character.HumanoidRootPart.Anchored = true
+game:GetService("RunService").Stepped:Connect(function()
+    if isFlying then
+        local moveVector = Vector3.new(0, 0, 0)
+        if game:GetService("UserInputService"):IsKeyDown(Enum.KeyCode.W) then
+            moveVector = moveVector + camera.CFrame.lookVector
         end
-            if game:GetService("UserInputService"):IsKeyDown(Enum.KeyCode.S) then
-                moveVector = moveVector - camera.CFrame.lookVector
-                player.Character.HumanoidRootPart.Anchored = false
-	    else
-	        player.Character.HumanoidRootPart.Anchored = true
+        if game:GetService("UserInputService"):IsKeyDown(Enum.KeyCode.S) then
+            moveVector = moveVector - camera.CFrame.lookVector
         end
-            if game:GetService("UserInputService"):IsKeyDown(Enum.KeyCode.A) then
-                moveVector = moveVector - camera.CFrame.rightVector
-                player.Character.HumanoidRootPart.Anchored = false
-	    else
-	        player.Character.HumanoidRootPart.Anchored = true
+        if game:GetService("UserInputService"):IsKeyDown(Enum.KeyCode.A) then
+            moveVector = moveVector - camera.CFrame.rightVector
         end
-            if game:GetService("UserInputService"):IsKeyDown(Enum.KeyCode.D) then
-                moveVector = moveVector + camera.CFrame.rightVector
-                player.Character.HumanoidRootPart.Anchored = false
-	    else
-	        player.Character.HumanoidRootPart.Anchored = true
+        if game:GetService("UserInputService"):IsKeyDown(Enum.KeyCode.D) then
+            moveVector = moveVector + camera.CFrame.rightVector
         end
-            -- Normaliza o vetor de movimento para manter a mesma velocidade em todas as direÁıes
+
+        -- Normaliza o vetor de movimento para manter a mesma velocidade em todas as dire√ß√µes
         if moveVector.Magnitude > 0 then
             moveVector = moveVector.unit * flySpeed
         end
 
         rootPart.Velocity = moveVector
-        end
-    end)
+    end
+
+    -- Atualiza a propriedade Anchored fora das condi√ß√µes
+    if isFlying then
+        player.Character.HumanoidRootPart.Anchored = true
+    else
+        player.Character.HumanoidRootPart.Anchored = false
+    end
+end)
+
 end
 
--- FunÁ„o para executar o hack 2
+-- Fun√ß√£o para executar o hack 2
 local function hack2()
     print("Hack 2 ativado!")
 
@@ -170,7 +167,7 @@ local function hack2()
     local originalNameVisibility = true
     local menuOpen = false
 
-    -- FunÁ„o para criar o menu de alteraÁ„o de ID e visibilidade do nome
+    -- Fun√ß√£o para criar o menu de altera√ß√£o de ID e visibilidade do nome
     local function createMenu()
         local gui = Instance.new("ScreenGui")
         gui.Parent = player.PlayerGui
@@ -244,7 +241,7 @@ local function hack2()
 
     local menuGui = createMenu()
 
-    -- FunÁ„o para abrir/fechar o menu
+    -- Fun√ß√£o para abrir/fechar o menu
     game:GetService("UserInputService").InputBegan:Connect(function(input)
         if input.KeyCode == Enum.KeyCode.M then
             menuOpen = not menuOpen
@@ -254,15 +251,15 @@ local function hack2()
 
 end
 
--- FunÁ„o para executar o hack 3
+-- Fun√ß√£o para executar o hack 3
 local function hack3()
-    -- Script em Lua para Roblox (hack) que cria um UI com botıes para abrir diferentes menus, com opÁ„o de fechar
-    -- Este script È invasivo e pode violar os termos de serviÁo do Roblox
+    -- Script em Lua para Roblox (hack) que cria um UI com bot√µes para abrir diferentes menus, com op√ß√£o de fechar
+    -- Este script √© invasivo e pode violar os termos de servi√ßo do Roblox
 
     -- Pega o jogador local
     local player = game.Players.LocalPlayer
 
-    -- FunÁ„o para criar o menu de copiar skins de outros jogadores
+    -- Fun√ß√£o para criar o menu de copiar skins de outros jogadores
     local function createCopySkinMenu()
         -- Cria uma tela de GUI
         local gui = Instance.new("ScreenGui")
@@ -279,7 +276,7 @@ local function hack3()
         frame.BorderSizePixel = 2
         frame.Parent = gui
     
-        -- Cria bot„o de fechar
+        -- Cria bot√£o de fechar
         local closeButton = Instance.new("TextButton")
         closeButton.Text = "Fechar"
         closeButton.TextColor3 = Color3.new(1, 1, 1)
@@ -298,10 +295,10 @@ local function hack3()
         local scrollFrame = Instance.new("ScrollingFrame")
         scrollFrame.Size = UDim2.new(0.9, 0, 0.8, 0)
         scrollFrame.Position = UDim2.new(0.05, 0, 0.1, 0)
-        scrollFrame.CanvasSize = UDim2.new(0, 0, 5, 0) -- Defina a altura conforme necess·rio
+        scrollFrame.CanvasSize = UDim2.new(0, 0, 5, 0) -- Defina a altura conforme necess√°rio
         scrollFrame.Parent = frame
     
-        -- FunÁ„o para copiar a aparÍncia de um jogador
+        -- Fun√ß√£o para copiar a apar√™ncia de um jogador
         local function copySkin(playerToCopy)
             local targetPlayer = game.Players:FindFirstChild(playerToCopy)
             if targetPlayer then
@@ -313,14 +310,14 @@ local function hack3()
                 local localCharacter = player.Character or player.CharacterAdded:Wait()
                 local localHumanoid = localCharacter:WaitForChild("Humanoid")
         
-                -- Limpa a aparÍncia do jogador local
+                -- Limpa a apar√™ncia do jogador local
                 for _,v in pairs(localCharacter:GetChildren()) do
                     if v:IsA("Accessory") or v:IsA("Clothing") or v:IsA("CharacterMesh") then
                         v:Destroy()
                     end
                 end
         
-                -- Copia a aparÍncia do jogador alvo para o jogador local
+                -- Copia a apar√™ncia do jogador alvo para o jogador local
                 for _,v in pairs(targetCharacter:GetChildren()) do
                     if v:IsA("Accessory") or v:IsA("Clothing") or v:IsA("CharacterMesh") then
                         v:Clone().Parent = localCharacter
@@ -340,18 +337,18 @@ local function hack3()
                     local targetPart = targetCharacter:FindFirstChild(partName)
                     local localPart = localCharacter:FindFirstChild(partName)
                     if targetPart and localPart then
-                        localPart.Transparency = 1 -- Torna o modelo local invisÌvel para evitar sobreposiÁ„o visual
+                        localPart.Transparency = 1 -- Torna o modelo local invis√≠vel para evitar sobreposi√ß√£o visual
                         targetPart:Clone().Parent = localCharacter
                     end
                 end
         
-                print("AparÍncia copiada de " .. playerToCopy)
+                print("Apar√™ncia copiada de " .. playerToCopy)
             else
-                print("Jogador n„o encontrado")
+                print("Jogador n√£o encontrado")
             end
         end
     
-        -- FunÁ„o para listar os jogadores
+        -- Fun√ß√£o para listar os jogadores
         local function listPlayers()
             -- Limpa a lista atual de jogadores antes de adicionar os jogadores novamente
             for _, child in ipairs(scrollFrame:GetChildren()) do
@@ -389,7 +386,7 @@ local function hack3()
         listPlayers()
     end
 
-    -- FunÁ„o para criar o menu de acelerar/diminuir velocidade
+    -- Fun√ß√£o para criar o menu de acelerar/diminuir velocidade
     local function createSpeedMenu()
         -- Cria uma tela de GUI
         local gui = Instance.new("ScreenGui")
@@ -406,7 +403,7 @@ local function hack3()
         frame.BorderSizePixel = 2
         frame.Parent = gui
     
-        -- Cria bot„o de fechar
+        -- Cria bot√£o de fechar
         local closeButton = Instance.new("TextButton")
         closeButton.Text = "Fechar"
         closeButton.TextColor3 = Color3.new(1, 1, 1)
@@ -421,7 +418,7 @@ local function hack3()
         end)
         closeButton.Parent = frame
     
-        -- Cria bot„o de acelerar
+        -- Cria bot√£o de acelerar
         local accelerateButton = Instance.new("TextButton")
         accelerateButton.Parent = frame
         accelerateButton.Position = UDim2.new(0.1, 0, 0.1, 0)
@@ -431,7 +428,7 @@ local function hack3()
             player.Character.Humanoid.WalkSpeed = player.Character.Humanoid.WalkSpeed + 5 -- aumenta a velocidade em 5
         end)
     
-        -- Cria bot„o de diminuir
+        -- Cria bot√£o de diminuir
         local decelerateButton = Instance.new("TextButton")
         decelerateButton.Parent = frame
         decelerateButton.Position = UDim2.new(0.1, 0, 0.4, 0)
@@ -442,7 +439,7 @@ local function hack3()
         end)
     end
 
-    -- FunÁ„o para criar o menu de teletransporte
+    -- Fun√ß√£o para criar o menu de teletransporte
     local function createTeleportMenu()
         -- Cria uma tela de GUI
         local gui = Instance.new("ScreenGui")
@@ -461,7 +458,7 @@ local function hack3()
         frame.BorderSizePixel = 2
         frame.Parent = gui
     
-        -- Cria bot„o de fechar
+        -- Cria bot√£o de fechar
         local closeButton = Instance.new("TextButton")
         closeButton.Text = "Fechar"
         closeButton.TextColor3 = Color3.new(1, 1, 1)
@@ -480,21 +477,21 @@ local function hack3()
         local scrollFrame = Instance.new("ScrollingFrame")
         scrollFrame.Size = UDim2.new(0.9, 0, 0.9, 0)
         scrollFrame.Position = UDim2.new(0.05, 0, 0.05, 0)
-        scrollFrame.CanvasSize = UDim2.new(0, 0, 5, 0) -- Defina a altura conforme necess·rio
+        scrollFrame.CanvasSize = UDim2.new(0, 0, 5, 0) -- Defina a altura conforme necess√°rio
         scrollFrame.Parent = frame
     
-        -- FunÁ„o para teletransportar para um jogador
+        -- Fun√ß√£o para teletransportar para um jogador
         local function teleportToPlayer(playerToTeleport)
             local targetPosition = playerToTeleport.Character and playerToTeleport.Character.PrimaryPart and playerToTeleport.Character.PrimaryPart.Position
             if targetPosition then
                 player.Character:SetPrimaryPartCFrame(CFrame.new(targetPosition))
                 print("Teleportado para " .. playerToTeleport.Name)
             else
-                print("N„o foi possÌvel obter a posiÁ„o de " .. playerToTeleport.Name)
+                print("N√£o foi poss√≠vel obter a posi√ß√£o de " .. playerToTeleport.Name)
             end
         end
     
-        -- FunÁ„o para listar os jogadores
+        -- Fun√ß√£o para listar os jogadores
         local function listPlayers()
             -- Limpa a lista atual de jogadores antes de adicionar os jogadores novamente
             for _, child in ipairs(scrollFrame:GetChildren()) do
@@ -532,7 +529,7 @@ local function hack3()
         listPlayers()
     end
 
-    -- FunÁ„o para criar o menu principal
+    -- Fun√ß√£o para criar o menu principal
     local function createMainMenu()
         -- Cria uma tela de GUI
         local gui = Instance.new("ScreenGui")
@@ -549,7 +546,7 @@ local function hack3()
         frame.BorderSizePixel = 2
         frame.Parent = gui
     
-        -- Cria bot„o de fechar
+        -- Cria bot√£o de fechar
         local closeButton = Instance.new("TextButton")
         closeButton.Text = "Fechar"
         closeButton.TextColor3 = Color3.new(1, 1, 1)
@@ -564,7 +561,7 @@ local function hack3()
         end)
         closeButton.Parent = frame
     
-        -- Cria bot„o para abrir o menu de acelerar/diminuir velocidade
+        -- Cria bot√£o para abrir o menu de acelerar/diminuir velocidade
         local speedButton = Instance.new("TextButton")
         speedButton.Parent = frame
         speedButton.Position = UDim2.new(0.1, 0, 0.1, 0)
@@ -574,7 +571,7 @@ local function hack3()
             createSpeedMenu()
         end)
     
-        -- Cria bot„o para abrir o menu de teletransporte
+        -- Cria bot√£o para abrir o menu de teletransporte
         local teleportButton = Instance.new("TextButton")
         teleportButton.Parent = frame
         teleportButton.Position = UDim2.new(0.1, 0, 0.4, 0)
@@ -584,7 +581,7 @@ local function hack3()
             createTeleportMenu()
         end)
     
-        -- Cria bot„o para abrir o menu de copiar skins
+        -- Cria bot√£o para abrir o menu de copiar skins
         local copySkinButton = Instance.new("TextButton")
         copySkinButton.Parent = frame
         copySkinButton.Position = UDim2.new(0.1, 0, 0.7, 0)
@@ -595,12 +592,12 @@ local function hack3()
         end)
     end
 
-    -- Chama a funÁ„o para criar o menu principal
+    -- Chama a fun√ß√£o para criar o menu principal
     createMainMenu()
 
 end
 
--- FunÁ„o para criar o UI Mod Menu
+-- Fun√ß√£o para criar o UI Mod Menu
 local function createModMenu()
     local screenGui = Instance.new("ScreenGui")
     screenGui.Name = "ModMenu"
