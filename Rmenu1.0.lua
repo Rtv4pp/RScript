@@ -124,35 +124,28 @@ local function hack1()
         end
     end)
 
-game:GetService("RunService").Stepped:Connect(function()
-    if isFlying then
-        local moveVector = Vector3.new(0, 0, 0)
+        game:GetService("RunService").Stepped:Connect(function()
+            if isFlying then
+                local moveVector = Vector3.new(0, 0, 0)
         if game:GetService("UserInputService"):IsKeyDown(Enum.KeyCode.W) then
             moveVector = moveVector + camera.CFrame.lookVector
-        end
-        if game:GetService("UserInputService"):IsKeyDown(Enum.KeyCode.S) then
+            player.Character.HumanoidRootPart.Anchored = false
+        elseif game:GetService("UserInputService"):IsKeyDown(Enum.KeyCode.S) then
             moveVector = moveVector - camera.CFrame.lookVector
-        end
-        if game:GetService("UserInputService"):IsKeyDown(Enum.KeyCode.A) then
+            player.Character.HumanoidRootPart.Anchored = false
+        elseif game:GetService("UserInputService"):IsKeyDown(Enum.KeyCode.A) then
             moveVector = moveVector - camera.CFrame.rightVector
-        end
-        if game:GetService("UserInputService"):IsKeyDown(Enum.KeyCode.D) then
+            player.Character.HumanoidRootPart.Anchored = false
+        elseif game:GetService("UserInputService"):IsKeyDown(Enum.KeyCode.D) then
             moveVector = moveVector + camera.CFrame.rightVector
+            player.Character.HumanoidRootPart.Anchored = false
         end
-
         -- Normaliza o vetor de movimento para manter a mesma velocidade em todas as direções
         if moveVector.Magnitude > 0 then
             moveVector = moveVector.unit * flySpeed
         end
 
         rootPart.Velocity = moveVector
-    end
-
-    -- Atualiza a propriedade Anchored fora das condições
-    if isFlying then
-        player.Character.HumanoidRootPart.Anchored = true
-    else
-        player.Character.HumanoidRootPart.Anchored = false
     end
 end)
 
